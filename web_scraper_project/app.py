@@ -13,9 +13,8 @@ def scrape_website(url):
 
         soup = BeautifulSoup(response.text, "html.parser")
 
-        # ----------------------------
         # Website Title
-        # ----------------------------
+ 
         title = soup.title.text.strip() if soup.title else "No title found"
 
         print("\n" + "=" * 50)
@@ -23,9 +22,8 @@ def scrape_website(url):
         print("=" * 50)
         print(title)
 
-        # ----------------------------
         # Headings
-        # ----------------------------
+
         headings = []
         for tag in soup.find_all(["h1", "h2", "h3"]):
             text = tag.get_text(strip=True)
@@ -41,9 +39,8 @@ def scrape_website(url):
         else:
             print("No headings found.")
 
-        # ----------------------------
         # Paragraphs
-        # ----------------------------
+
         paragraphs = []
         for p in soup.find_all("p"):
             text = p.get_text(strip=True)
@@ -59,21 +56,18 @@ def scrape_website(url):
         else:
             print("No paragraphs found.")
 
-        # ----------------------------
         # Save Title separately
-        # ----------------------------
+
         with open("title.txt", "w", encoding="utf-8") as f:
             f.write(title)
 
-        # ----------------------------
         # Save Headings to CSV
-        # ----------------------------
+
         df_headings = pd.DataFrame({"Headings": headings})
         df_headings.to_csv("headings.csv", index=False, encoding="utf-8")
 
-        # ----------------------------
         # Save Paragraphs to CSV
-        # ----------------------------
+
         df_paragraphs = pd.DataFrame({"Paragraphs": paragraphs})
         df_paragraphs.to_csv("paragraphs.csv", index=False, encoding="utf-8")
 
@@ -90,9 +84,8 @@ def scrape_website(url):
         print("❌ Something went wrong:", e)
 
 
-# ----------------------------
 # Main Program
-# ----------------------------
+
 if __name__ == "__main__":
     print("🔍 PYTHON WEB SCRAPER")
     print("-" * 50)
